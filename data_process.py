@@ -51,6 +51,8 @@ def cal_week_and_weekday(x) -> None:
 
 def standardize(x) -> pd.DataFrame:
     std_features = x.columns.tolist()[:-6]
+    std_features.append('label_y_5')
+    print(std_features)
     cache: pd.DataFrame = x[std_features]
 
     for i in std_features:
@@ -80,4 +82,4 @@ if __name__ == '__main__':
 
     corr = std_dataset.corr(numeric_only=True)  # 通过相关矩阵观察各个变量的相关性
     corr.to_csv(root_path + '\\' + 'correlation_matrix.csv')
-    
+

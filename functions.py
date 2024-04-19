@@ -3,6 +3,7 @@ import math
 
 import pandas as pd
 import os
+import torch
 
 root_path = os.getcwd()
 
@@ -18,3 +19,7 @@ def data_init() -> (pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame):
     cache_3 = dataset.iloc[-10:, :-1]
     cache_4 = dataset.iloc[-10:, -1:]
     return cache_1, cache_2, cache_3, cache_4
+
+
+def cal_ssr(x: torch.tensor, y: torch.tensor) -> torch.float:
+    return torch.sum((x - y) ** 2)
