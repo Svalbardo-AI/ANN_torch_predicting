@@ -53,16 +53,15 @@ class Model:
             self.output.grad.zero_()
             self.b_y.grad.zero_()
 
-    def predict(self, x_true, y_true) -> None:
+    def predict(self, x_true, y_true) -> torch.tensor:
         x = torch.tensor(np.array(x_true), dtype=torch.float)
         hidden_1 = torch.sigmoid(torch.matmul(x, self.layer_1) + self.b_1)
         hidden_2 = torch.sigmoid(torch.matmul(hidden_1, self.layer_2) + self.b_2)
         hidden_3 = torch.sigmoid(torch.matmul(hidden_2, self.layer_3) + self.b_3)
         y_predict = torch.sigmoid(torch.matmul(hidden_3, self.output) + self.b_y)
         cache = torch.tensor(np.array(y_true))
-        print('SSR: ', f.cal_ssr(cache, y_predict))
-        print('y_true: ', y_true)
-        print('y_predict', y_predict)
+        ssr = f.cal_ssr(cache, y_predict)
+        return ssr
 
 
 if __name__ == '__main__':
